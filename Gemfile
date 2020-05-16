@@ -46,7 +46,6 @@ group :development do
   gem 'slim_lint'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'graphiql-rails'
 end
 
 group :test do
