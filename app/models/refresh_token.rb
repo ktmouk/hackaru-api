@@ -24,7 +24,7 @@ class RefreshToken < ApplicationRecord
       client_id: client_id,
       token: raw
     )
-    [client_id, raw]
+    [refresh_token, raw]
   end
 
   def self.fetch(client_id:, raw:)
