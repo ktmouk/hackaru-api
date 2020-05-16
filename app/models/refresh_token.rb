@@ -18,12 +18,13 @@ class RefreshToken < ApplicationRecord
 
   def self.issue(user)
     raw = SecureRandom.urlsafe_base64(nil, false)
+    client_id = SecureRandom.urlsafe_base64(nil, false)
     refresh_token = create!(
       user: user,
-      client_id: SecureRandom.urlsafe_base64(nil, false),
+      client_id: client_id,
       token: raw
     )
-    [refresh_token, raw]
+    [client_id, raw]
   end
 
   def self.fetch(client_id:, raw:)
