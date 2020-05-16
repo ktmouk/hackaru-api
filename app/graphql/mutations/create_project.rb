@@ -1,5 +1,5 @@
 module Mutations
-  class CreateProject < Mutations::BaseMutation
+  class CreateProject < BaseMutation
     argument :user_id, Int, required: true
     argument :name, String, required: true
     argument :color, String, required: true
