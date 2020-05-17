@@ -1,0 +1,18 @@
+ja:
+  execution_error_builder:
+    sign_in_failed:
+      message: 'メールアドレスまたはパスワードが間違っています。'
+    access_token_invalid:
+      message: '認証に失敗しました。再度ログインし直してください。'
+    refresh_token_invalid:
+      message: 'リフレッシュトークンが不正または失効しています。再度ログインし直してください。'
+    current_password_invalid:
+      message: '現在のパスワードが正しくありません。'
+    password_reset_token_invalid:
+      message: 'リクエストが不正または有効期限が切れています。メールの送信から再試行してください。'
+    activity_calendar_token_invalid:
+      message: 'URLが不正または有効期限が切れています。URLを再発行してください。'
+    email_not_found:
+      message: 'そのメールアドレスは登録されていません。'
+    unknown:
+      message: '何か問題が発生したようです。再度お試しください。'

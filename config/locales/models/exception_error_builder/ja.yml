@@ -1,0 +1,24 @@
+ja:
+  exception_error_builder:
+    argument_error:
+      message: 'パラメータが正しくありません。'
+    active_record:
+      record_not_found:
+        message: '対象のデータが見つかりません。'
+      record_invalid:
+      not_null_violation:
+        message: 'パラメータが不足しています。'
+    action_controller:
+      parameter_missing:
+        message: 'パラメータが不足しています。'
+      routing_error:
+        message: 'ページが見つかりません。'
+      unknown_format:
+        message: 'ページが見つかりません。'
+    groupdate:
+      error:
+        message: 'パラメータが正しくありません。'
+    rails_param:
+      param:
+        invalid_parameter_error:
+          message: 'パラメータが正しくありません。'

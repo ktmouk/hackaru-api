@@ -1,0 +1,26 @@
+en:
+  exception_error_builder:
+    default:
+      message: 'We''re sorry, but something went wrong.'
+    argument_error:
+      message: 'The request has invalid parameter.'
+    active_record:
+      record_not_found:
+        message: 'The requested resouce is not exists.'
+      record_invalid:
+      not_null_violation:
+        message: 'The request is missing a required parameter.'
+    action_controller:
+      parameter_missing:
+        message: 'The request is missing a required parameter.'
+      routing_error:
+        message: 'The requested resouce is not exists.'
+      unknown_format:
+        message: 'The requested resouce is not exists.'
+    groupdate:
+      error:
+        message: 'The request has invalid parameter.'
+    rails_param:
+      param:
+        invalid_parameter_error:
+          message: 'The request has invalid parameter.'

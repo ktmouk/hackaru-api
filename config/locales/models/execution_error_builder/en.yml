@@ -1,0 +1,18 @@
+en:
+  execution_error_builder:
+    sign_in_failed:
+      message: 'Invalid email or password.'
+    access_token_invalid:
+      message: 'Authenticate failed, please sign in before continuing.'
+    refresh_token_invalid:
+      message: 'Refresh token is invalid or expired, please sign in before continuing.'
+    current_password_invalid:
+      message: 'Current password is invalid.'
+    password_reset_token_invalid:
+      message: 'The request is invalid or expired, please request a new one.'
+    activity_calendar_token_invalid:
+      message: 'The url is invalid or expired, please regenerate a url.'
+    email_not_found:
+      message: 'The email is not registration.'
+    unknown:
+      message: 'We''re sorry, but something went wrong.'

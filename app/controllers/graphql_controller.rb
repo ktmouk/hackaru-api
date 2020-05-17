@@ -5,7 +5,7 @@ class GraphqlController < ApplicationController
     render json: HackaruApiSchema.execute(
       params[:query],
       variables: ensure_hash(params[:variables]),
-      context: { current_user: authenticate_user },
+      context: { current_user: current_user },
       operation_name: params[:operationName]
     )
   rescue StandardError => e
@@ -16,11 +16,10 @@ class GraphqlController < ApplicationController
 
   private
 
-  # TMP
-  def authenticate_user
-    current_user = AccessToken.verify(request.headers['X-Access-Token'])
-    Raven.user_context(id: current_user&.id)
-    current_user
+  def current_user
+    user = AccessToken.verify(request.headers['X-Access-Token'])
+    Raven.user_context(id: user&.id)
+    user
   end
 
   # Handle form data, JSON body, or a blank value
