@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class CreateUser < BaseMutation
     argument :email, String, required: true
@@ -5,8 +7,8 @@ module Mutations
     argument :time_zone, String, required: true
     argument :locale, String, required: true
 
-    field :user, Types::UserType, null: false
-    field :refresh_token, Types::RefreshTokenType, null: false
+    field :user, Types::Objects::UserType, null: false
+    field :refresh_token, Types::Objects::RefreshTokenType, null: false
 
     def resolve(**user)
       user = UserInitializer.new(user).create!

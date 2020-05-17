@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class HackaruApiSchema < GraphQL::Schema
   mutation(Types::MutationType)
-  query(Types::QueryType)
+  query(Types::Queries::QueryType)
 
   # Opt in to the new runtime (default in future graphql-ruby versions)
   use GraphQL::Execution::Interpreter

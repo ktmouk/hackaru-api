@@ -4,7 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  post "/graphql", to: "graphql#execute"
+  post '/graphql', to: 'graphql#execute'
   mount Sidekiq::Web, at: '/sidekiq'
 
   scope :v1 do
