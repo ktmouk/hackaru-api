@@ -14,12 +14,12 @@ class HackaruApiSchema < GraphQL::Schema
   use GraphQL::Execution::Errors
 
   rescue_from(ActiveRecord::RecordInvalid) do |error|
-    ExecutionError::Validation.new(error).build
+    ExecutionErrorBuilder.from_record_invalid(error).build
   end
 
   rescue_from(StandardError) do |error|
-    builder = ExecutionError::Exception.new(error)
-    raise error unless builder.exists?
+    builder = ExecutionErrorBuilder.from_exception(error)
+    raise error unless builder
     builder.build
   end
 end

@@ -14,5 +14,7 @@ en:
       message: 'The url is invalid or expired, please regenerate a url.'
     email_not_found:
       message: 'The email is not registration.'
-    unknown:
-      message: 'We''re sorry, but something went wrong.'
+    exception:
+      active_record:
+        record_not_found:
+          message: 'The requested record is not exists.'

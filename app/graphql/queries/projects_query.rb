@@ -17,7 +17,7 @@ module Queries
     end
 
     def project(id:)
-      context[:current_user].projects.find(id)
+      Project.find(id)
     end
   end
 end
