@@ -22,4 +22,8 @@ class HackaruApiSchema < GraphQL::Schema
     raise error unless builder
     builder.build
   end
+
+   def self.unauthorized_object(error)
+    raise ExecutionErrorBuilder.from_i18n(:permisson_denied).build
+  end
 end
