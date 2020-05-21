@@ -10,8 +10,8 @@ module Mutations
     field :user, Types::UserType, null: false
     field :refresh_token, Types::RefreshTokenType, null: false
 
-    def resolve(**user)
-      user = UserInitializer.new(user).create!
+    def resolve(**args)
+      user = UserInitializer.new(args).create!
       refresh_token, raw = RefreshToken.issue(user)
       {
         user: user,
