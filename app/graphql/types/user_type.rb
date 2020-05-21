@@ -10,5 +10,6 @@ module Types
     field :receive_month_report, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :projects, [Types::ProjectType], null: false
   end
 end

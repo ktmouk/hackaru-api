@@ -2,10 +2,6 @@
 
 module Types
   class ProjectType < Types::BaseObject
-    def self.authorized?(object, context)
-      super && context[:current_user]&.id == object.user_id
-    end
-
     field :id, Int, null: false
     field :name, String, null: false
     field :color, String, null: false

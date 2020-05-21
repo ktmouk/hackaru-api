@@ -14,8 +14,6 @@ en:
       message: 'The url is invalid or expired, please regenerate a url.'
     email_not_found:
       message: 'The email is not registration.'
-    permisson_denied:
-      message: 'Permisson denied'
     exception:
       active_record:
         record_not_found:

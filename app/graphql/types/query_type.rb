@@ -2,6 +2,6 @@
 
 module Types
   class QueryType < Types::BaseObject
-    include Queries::ProjectsQuery
+    include Queries::ViewerQuery
   end
 end
