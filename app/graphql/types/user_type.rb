@@ -11,5 +11,6 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :projects, [Types::ProjectType], null: false
+    field :activities, [Types::ActivityType], null: false
   end
 end
