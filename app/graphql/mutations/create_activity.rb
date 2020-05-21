@@ -2,6 +2,8 @@
 
 module Mutations
   class CreateActivity < BaseMutation
+    include Mutations::Concerns::Authorizable
+
     argument :description, String, required: false
     argument :project_id, Int, required: false
     argument :started_at, GraphQL::Types::ISO8601DateTime, required: true

@@ -2,6 +2,8 @@
 
 module Mutations
   class CreateProject < BaseMutation
+    include Mutations::Concerns::Authorizable
+
     argument :name, String, required: true
     argument :color, String, required: true
 
