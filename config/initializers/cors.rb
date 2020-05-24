@@ -15,6 +15,10 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       origins '*'
     end
 
+    resource '/graphql',
+             headers: :any,
+             methods: %i[post]
+
     resource '/v1/auth/*',
              headers: :any,
              methods: %i[get post put patch options delete],
