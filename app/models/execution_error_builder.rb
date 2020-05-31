@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExecutionErrorBuilder
   def initialize(message, code)
     @message = message

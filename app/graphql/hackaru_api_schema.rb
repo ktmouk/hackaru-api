@@ -20,6 +20,7 @@ class HackaruApiSchema < GraphQL::Schema
   rescue_from(StandardError) do |error|
     builder = ExecutionErrorBuilder.from_exception(error)
     raise error unless builder
+
     builder.build
   end
 end

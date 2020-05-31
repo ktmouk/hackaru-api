@@ -10,6 +10,7 @@ module Queries
 
     def viewer
       return context[:current_user] if context[:current_user]
+
       raise ExecutionErrorBuilder.from_i18n(:access_token_invalid).build
     end
   end
