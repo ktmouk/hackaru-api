@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
-module Mutations
-  class CreateAccessToken < BaseMutation
-    argument :email, String, required: true
-    argument :password, String, required: true
-
-    field :csrf_token, String, null: true
-
-    def resolve(email:, password:)
-      user = authenticate_user!(email, password)
+module Auth
+  class AccessTokensController < ApplicationController
+    def create
+      user = authenticate_user!
       tokens = build_jwt_session(user).login
       set_access_cookie(tokens[:access])
-      { csrf_token: tokens[:csrf] }
+      render json: { csrf_token: tokens[:csrf] }
     end
 
     private
@@ -32,10 +27,17 @@ module Mutations
       )
     end
 
-    def authenticate_user!(email, password)
-      user = User.find_by(email: email)
-      raise_error :sign_in_failed unless user&.authenticate(password)
+    def authenticate_user!
+      user = User.find_by(email: user_params[:email])
+      render status: 401 unless user&.authenticate(user_params[:password])
       user
+    end
+
+    def user_params
+      params.require(:user).permit(
+        :email,
+        :password
+      )
     end
   end
 end

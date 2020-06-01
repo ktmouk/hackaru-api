@@ -14,3 +14,7 @@ JWTSessions.refresh_exp_time = ENV.fetch(
   'JWT_SESSIONS_REFRESH_EXP_TIME',
   31_536_000
 )
+
+JWTSessions.token_store = :redis, {
+  redis_url: ENV.fetch('REDIS_URL', 'redis://redis:6379/0')
+}

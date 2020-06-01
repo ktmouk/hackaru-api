@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     use_doorkeeper
   end
 
+  namespace :auth do
+    resources :access_tokens, only: :create
+  end
+
+  # deprecated
   namespace :v1 do
     namespace :oauth do
       resources :applications, only: :create
