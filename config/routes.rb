@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :auth do
-    resources :access_tokens, only: :create
+    resource :access_token, only: %i[create update]
   end
 
   # deprecated

@@ -2,14 +2,35 @@
 
 module Auth
   class AccessTokensController < ApplicationController
+    include JWTSessions::RailsAuthorization
+    rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
+
+    before_action :authorize_refresh_by_access_cookie!, only: :update
+
     def create
       user = authenticate_user!
-      tokens = build_jwt_session(user).login
+      tokens = build_session({ user_id: user.id }).login
+      set_access_cookie(tokens[:access])
+      render json: { csrf_token: tokens[:csrf] }
+    end
+
+    def update
+      tokens = build_session(claimless_payload).refresh_by_access_payload
       set_access_cookie(tokens[:access])
       render json: { csrf_token: tokens[:csrf] }
     end
 
     private
+
+    def authenticate_user!
+      user = User.find_by(email: user_params[:email])
+      not_authorized unless user&.authenticate(user_params[:password])
+      user
+    end
+
+    def not_authorized
+      render status: :unauthorized
+    end
 
     def set_access_cookie(access_token)
       response.set_cookie(
@@ -20,17 +41,11 @@ module Auth
       )
     end
 
-    def build_jwt_session(user)
+    def build_session(payload)
       JWTSessions::Session.new(
-        payload: { user_id: user.id },
+        payload: payload,
         refresh_by_access_allowed: true
       )
-    end
-
-    def authenticate_user!
-      user = User.find_by(email: user_params[:email])
-      render status: 401 unless user&.authenticate(user_params[:password])
-      user
     end
 
     def user_params
