@@ -2,22 +2,40 @@
 
 module Mutations
   class CreateAccessToken < BaseMutation
-    argument :client_id, String, required: true
-    argument :token, String, required: true
+    argument :email, String, required: true
+    argument :password, String, required: true
 
-    field :access_token, Types::AccessTokenType, null: true
+    field :csrf_token, :string, null: true
 
-    def resolve(client_id:, token:)
-      access_token = issue_access_token!(client_id, token)
-      { access_token: { token: access_token.issue } }
+    def resolve(email:, password:)
+      user = authenticate_user!(email, password)
+      tokens = build_jwt_session(user).login
+      set_access_cookie(tokens[:access])
+      { csrf_token: tokens[:csrf] }
     end
 
     private
 
-    def issue_access_token!(client_id, token)
-      user = RefreshToken.fetch(client_id: client_id, raw: token)&.user
-      raise_error :refresh_token_invalid unless user
-      AccessToken.new(user: user)
+    def set_access_cookie(access_token)
+      response.set_cookie(
+        JWTSessions.access_cookie,
+        value: access_token,
+        httponly: true,
+        secure: Rails.env.production?
+      )
+    end
+
+    def build_jwt_session(user)
+      JWTSessions::Session.new(
+        payload: { user_id: user.id },
+        refresh_by_access_allowed: true
+      )
+    end
+
+    def authenticate_user!(email, password)
+      user = User.find_by(email: email)
+      raise_error :sign_in_failed unless user&.authenticate(password)
+      user
     end
   end
 end
