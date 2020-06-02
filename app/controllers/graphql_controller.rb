@@ -17,9 +17,12 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    user = AccessToken.verify(request.headers['X-Access-Token'])
+    authorize_by_access_cookie!
+    user = User.find(claimless_payload['user_id'])
     Raven.user_context(id: user&.id)
     user
+  rescue JWTSessions::Errors::Unauthorized
+    nil
   end
 
   # Handle form data, JSON body, or a blank value

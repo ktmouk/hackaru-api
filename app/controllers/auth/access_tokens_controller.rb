@@ -2,7 +2,6 @@
 
 module Auth
   class AccessTokensController < ApplicationController
-    include JWTSessions::RailsAuthorization
     rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
 
     before_action :authorize_refresh_by_access_cookie!, only: :update
@@ -36,6 +35,7 @@ module Auth
       response.set_cookie(
         JWTSessions.access_cookie,
         value: access_token,
+        path: '/',
         httponly: true,
         secure: Rails.env.production?
       )
