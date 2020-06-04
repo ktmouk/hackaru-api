@@ -9,15 +9,17 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    if ENV.fetch('RAILS_ENV') == 'production'
-      origins(/^#{ENV.fetch('HACKARU_WEB_URL')}$/)
-    else
-      origins '*'
-    end
+    origins /^#{ENV.fetch('HACKARU_WEB_URL')}$/
 
     resource '/graphql',
              headers: :any,
-             methods: %i[post]
+             methods: %i[post],
+             credentials: true
+
+    resource '/auth/access_token',
+             headers: :any,
+             methods: %i[post put],
+             credentials: true
 
     resource '/v1/auth/*',
              headers: :any,
