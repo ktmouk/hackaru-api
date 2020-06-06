@@ -27,3 +27,8 @@ services:
     links:
       - db
       - redis
+
+networks:
+  default:
+    external:
+      name: hackaru
