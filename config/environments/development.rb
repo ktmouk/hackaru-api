@@ -81,4 +81,7 @@ Rails.application.configure do
 
   # Enable rack attack
   Rack::Attack.enabled = true
+
+  # Allow request from nuxt
+  config.hosts << 'api'
 end
