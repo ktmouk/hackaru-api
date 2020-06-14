@@ -11,10 +11,16 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :projects, [Types::ProjectType], null: false
-    field :activities, Types::ActivityType.connection_type, null: false
 
-    def activities
-      object.activities.order(started_at: :desc)
+    field :activities, [Types::ActivityType], null: false do
+      argument :from, GraphQL::Types::ISO8601DateTime, required: false
+      argument :to, GraphQL::Types::ISO8601DateTime, required: false
+    end
+
+    def activities(args)
+      object.activities
+        .where(started_at: args[:from]..args[:to])
+        .order(started_at: :desc)
     end
   end
 end
