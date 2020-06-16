@@ -11,10 +11,15 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :projects, [Types::ProjectType], null: false
+    field :working_activity, Types::ActivityType, null: true
 
     field :activities, [Types::ActivityType], null: false do
       argument :from, GraphQL::Types::ISO8601DateTime, required: false
       argument :to, GraphQL::Types::ISO8601DateTime, required: false
+    end
+
+    def working_activity
+      object.activities.find_by(stopped_at: nil)
     end
 
     def activities(args)
