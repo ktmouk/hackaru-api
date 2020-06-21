@@ -5,7 +5,7 @@ module Mutations
     include Mutations::Concerns::Authorizable
 
     argument :description, String, required: false
-    argument :project_id, Int, required: false
+    argument :project_id, ID, required: false
     argument :started_at, GraphQL::Types::ISO8601DateTime, required: true
     argument :stopped_at, GraphQL::Types::ISO8601DateTime, required: false
 
