@@ -13,7 +13,7 @@ module Types
     field :projects, [Types::ProjectType], null: false
     field :working_activity, Types::ActivityType, null: true
 
-    field :activities, [Types::ActivityType], null: false do
+    field :stopped_activities, [Types::ActivityType], null: false do
       argument :from, GraphQL::Types::ISO8601DateTime, required: false
       argument :to, GraphQL::Types::ISO8601DateTime, required: false
     end
@@ -22,9 +22,10 @@ module Types
       object.activities.find_by(stopped_at: nil)
     end
 
-    def activities(args)
+    def stopped_activities(args)
       object.activities
         .where(started_at: args[:from]..args[:to])
+        .where.not(stopped_at: nil)
         .order(started_at: :desc)
     end
   end
